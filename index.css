@@ -4,8 +4,8 @@
 }
 
 body {
-  background-color: #111316;
-  color: white;
+  background-color: #f8f4e8;
+  color: black;
   font-family: 'Lexend Deca', sans-serif
 }
 
@@ -25,7 +25,7 @@ body {
 }
 
 .main{
-  background-color: #111316;
+  background-color: #f8f4e8;
   height: 100vh;
 }
 
@@ -35,7 +35,7 @@ body {
 
 .head{
   font-size: 3.5rem;
-  color: white;
+  color: black;
   font-family: 'Airbnb';
 }
 
@@ -86,8 +86,8 @@ body {
 }
 
 input{
-  background-color: #111316;
-  color: white;
+  background-color: white;
+  color: black;
   border-radius: 5px;
   width: 20rem;
   font-size: 1.1rem;
@@ -138,7 +138,7 @@ input:focus{
 }
 
 .left-side{
-  background-color: black;
+  background-color: #121211;
   height: 100vh;
   width: 78%;
 }
@@ -150,7 +150,7 @@ input:focus{
 .right-side{
   height: 100vh;
   width: 22%;
-  background-color: #111316;
+  background-color: #f8f4e8;
 }
 
 .video{

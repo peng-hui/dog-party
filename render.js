@@ -347,17 +347,19 @@ function videoControlsHandler(e) {
 }
 
 function onChangeFile() {
-	const file = document.getElementById("file-id").files[0]
-    const path = (window.URL || window.webkitURL).createObjectURL(file)
-    const size = file.size
+	const url = document.getElementById("file-id")
+    //const path = (window.URL || window.webkitURL).createObjectURL(file)
+    const path = url.value
+    const size = 100 // hardcoded one to bypass the check
     localStorage.setItem("videoSize", size)
     localStorage.setItem("videoPath", path)
 }
 
 function onChangeJoinFile() {
-    const file = document.getElementById("join-file-id").files[0]
-    const path = (window.URL || window.webkitURL).createObjectURL(file)
-    const size = file.size
+    const url = document.getElementById("join-file-id")
+    //const path = (window.URL || window.webkitURL).createObjectURL(file)
+    const path = url.value
+    const size = 100 // hardcoded one to bypass the check
     localStorage.setItem("videoSize", size)
     localStorage.setItem("videoPath", path)
 }

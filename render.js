@@ -26,12 +26,12 @@ const append = message => {
 }
 
 function appendData(roomName, roomCode){
-    append({name: "Local Party", content: "Local Party allows you to watch local videos with your friends synchronously while chatting.", pfp: "#f3dfbf"})
-    append({name: "Local Party", content: `Welcome to ${roomName}`, pfp: "#f3dfbf"})
-    append({name: "Local Party", content: `Share the room code (${roomCode}) with others to invite them to the party.`, pfp: "#f3dfbf"})
-    append({name: "Local Party", content: "They would need to have the same video file with them to join this watch party.", pfp: "#f3dfbf"})
-    append({name: "Local Party", content: "You can change your username in the settings page.", pfp: "#f3dfbf"})
-    append({name: "Local Party", content: "Source code for the project is available at https://github.com/sheldor1510/local-party", pfp: "#f3dfbf"})
+    //append({name: "Dogs' Party", content: "Dogs' Party allows you to watch videos with your friends synchronously while chatting.", pfp: "black"})
+    append({name: "Dogs' Party", content: `Welcome to ${roomName}`, pfp: "black"})
+    append({name: "Dogs' Party", content: `Share the room code (${roomCode}) with others to invite them to the party.`, pfp: "black"})
+    // append({name: "Dogs' Party", content: "They would need to have the same video file with them to join this watch party.", pfp: "#f3dfbf"})
+    // append({name: "Dogs' Party", content: "You can change your username in the settings page.", pfp: "#f3dfbf"})
+    //append({name: "Dogs' Party", content: "Source code for the project is available at https://github.com/sheldor1510/local-party", pfp: "#f3dfbf"})
 }
 
 document.getElementById('roomCodeText').addEventListener('click', ()=>{
@@ -95,7 +95,7 @@ socket.on('receive', data => {
 
 socket.on('left', data => {
     append({
-        name: 'Local Party',
+        name: "Dogs' Party",
         content: `${data.name} left the party.`,
         pfp: '#f3dfbf',
     })
@@ -109,7 +109,7 @@ socket.on('left', data => {
 
 socket.on('leftdefault', data => {
     append({
-        name: 'Local Party',
+        name: "Dogs' Party",
         content: `${data.name} left the party.`,
         pfp: '#f3dfbf',
     })
@@ -130,7 +130,7 @@ socket.on('playerControlUpdate', data => {
         videoPlayer.play()
         let content = time("played", data.username, data.context)
         append({
-            name: "Local Party", 
+            name: "Dogs' Party", 
             content: content,
             pfp: "#f3dfbf"
         })
@@ -143,7 +143,7 @@ socket.on('playerControlUpdate', data => {
         videoPlayer.pause()
         let content = time("played",data.username,data.context)
         append({
-            name: "Local Party", 
+            name: "Dogs' Party", 
             content: content,
             pfp: "#f3dfbf"
         })
@@ -216,7 +216,7 @@ document.addEventListener("click", function (e) {
                         appendData(roomName, roomCode)
                         socket.emit('new-user-joined', { name: localStorage.getItem("username"), roomCode: roomCode, pfp: localStorage.getItem("pfpUrl") })
                         createPage.style.display = "none"
-                        document.title = `Local Party | ${roomName}`
+                        document.title = `Dogs' Party | ${roomName}`
                         roomPage.style.display = "block"
                     }
                 })
@@ -270,7 +270,7 @@ document.addEventListener("click", function (e) {
                         appendData(resp.roomName, resp.roomCode)
                         socket.emit('new-user-joined', { name: localStorage.getItem("username"), roomCode: resp.roomCode, pfp: localStorage.getItem("pfpUrl") })
                         joinPage.style.display = "none"
-                        document.title = `Local Party | ${resp.roomName}`
+                        document.title = `Dogs' Party | ${resp.roomName}`
                         roomPage.style.display = "block"
                     }   
                 })
@@ -320,7 +320,7 @@ function videoControlsHandler(e) {
             socket.emit("playerControl", {message: "play", context: videoPlayer.currentTime, roomCode: localStorage.getItem("roomCode")}) 
             let content = time("played","You", videoPlayer.currentTime)
             append({
-                name: "Local Party", 
+                name: "Dogs' Party", 
                 content: content,
                 pfp: "#f3dfbf"
             })
@@ -334,7 +334,7 @@ function videoControlsHandler(e) {
             socket.emit("playerControl", {message: "pause", context: videoPlayer.currentTime, roomCode: localStorage.getItem("roomCode")})
             let content = time("paused","You", videoPlayer.currentTime)
             append({
-                name: "Local Party", 
+                name: "Dogs' Party", 
                 content: content,
                 pfp: "#f3dfbf"
             })

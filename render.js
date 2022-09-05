@@ -183,7 +183,7 @@ document.addEventListener("click", function (e) {
             } else {
                 localStorage.setItem("roomName", roomName)
                 localStorage.setItem("username", document.getElementById("create-username").value)
-                const roomCode = randomString(5, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+                const roomCode = "ddogs";//randomString(5, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
                 document.getElementById("createRoomText").innerHTML = ""
                 document.getElementById("roomNameText").innerHTML = roomName
                 document.getElementById("roomCodeText").innerHTML = roomCode

@@ -29,9 +29,9 @@ function appendData(roomName, roomCode){
     //append({name: "Dogs' Party", content: "Dogs' Party allows you to watch videos with your friends synchronously while chatting.", pfp: "black"})
     append({name: "Dogs' Party", content: `Welcome to ${roomName}`, pfp: "black"})
     append({name: "Dogs' Party", content: `Share the room code (${roomCode}) with others to invite them to the party.`, pfp: "black"})
-    // append({name: "Dogs' Party", content: "They would need to have the same video file with them to join this watch party.", pfp: "#f3dfbf"})
-    // append({name: "Dogs' Party", content: "You can change your username in the settings page.", pfp: "#f3dfbf"})
-    //append({name: "Dogs' Party", content: "Source code for the project is available at https://github.com/sheldor1510/local-party", pfp: "#f3dfbf"})
+    // append({name: "Dogs' Party", content: "They would need to have the same video file with them to join this watch party.", pfp: "black"})
+    // append({name: "Dogs' Party", content: "You can change your username in the settings page.", pfp: "black"})
+    //append({name: "Dogs' Party", content: "Source code for the project is available at https://github.com/sheldor1510/local-party", pfp: "black"})
 }
 
 document.getElementById('roomCodeText').addEventListener('click', ()=>{
@@ -97,7 +97,7 @@ socket.on('left', data => {
     append({
         name: "Dogs' Party",
         content: `${data.name} left the party.`,
-        pfp: '#f3dfbf',
+        pfp: 'black',
     })
     document.getElementById("pplinparty").setAttribute("title", `People in party: ${data.members}`)
     var toolTipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
@@ -111,7 +111,7 @@ socket.on('leftdefault', data => {
     append({
         name: "Dogs' Party",
         content: `${data.name} left the party.`,
-        pfp: '#f3dfbf',
+        pfp: 'black',
     })
     document.getElementById("pplinparty").setAttribute("title", `People in party: ${data.members}`)
     var toolTipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
@@ -132,7 +132,7 @@ socket.on('playerControlUpdate', data => {
         append({
             name: "Dogs' Party", 
             content: content,
-            pfp: "#f3dfbf"
+            pfp: "black"
         })
         document.getElementById("messages-box").scrollTop = document.getElementById("messages-box").scrollHeight
     }
@@ -145,7 +145,7 @@ socket.on('playerControlUpdate', data => {
         append({
             name: "Dogs' Party", 
             content: content,
-            pfp: "#f3dfbf"
+            pfp: "black"
         })
         document.getElementById("messages-box").scrollTop = document.getElementById("messages-box").scrollHeight
     }
@@ -322,7 +322,7 @@ function videoControlsHandler(e) {
             append({
                 name: "Dogs' Party", 
                 content: content,
-                pfp: "#f3dfbf"
+                pfp: "black"
             })
             document.getElementById("messages-box").scrollTop = document.getElementById("messages-box").scrollHeight
         } 
@@ -336,7 +336,7 @@ function videoControlsHandler(e) {
             append({
                 name: "Dogs' Party", 
                 content: content,
-                pfp: "#f3dfbf"
+                pfp: "black"
             })
             document.getElementById("messages-box").scrollTop = document.getElementById("messages-box").scrollHeight
         }

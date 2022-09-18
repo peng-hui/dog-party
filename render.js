@@ -27,33 +27,33 @@ const append = message => {
 
 function appendData(roomName, roomCode){
     //append({name: "Dogs' Party", content: "Dogs' Party allows you to watch videos with your friends synchronously while chatting.", pfp: "black"})
-    append({name: "Dogs' Party", content: `Welcome to ${roomName}`, pfp: "black"})
-    append({name: "Dogs' Party", content: `Share the room code (${roomCode}) with others to invite them to the party.`, pfp: "black"})
+    //append({name: "Dogs' Party", content: `Welcome to ${roomName}`, pfp: "black"})
+    //append({name: "Dogs' Party", content: `Share the room code (${roomCode}) with others to invite them to the party.`, pfp: "black"})
     // append({name: "Dogs' Party", content: "They would need to have the same video file with them to join this watch party.", pfp: "black"})
     // append({name: "Dogs' Party", content: "You can change your username in the settings page.", pfp: "black"})
     //append({name: "Dogs' Party", content: "Source code for the project is available at https://github.com/sheldor1510/local-party", pfp: "black"})
 }
 
-document.getElementById('roomCodeText').addEventListener('click', ()=>{
-    let text = document.getElementById('roomCodeText').innerHTML
-    navigator.clipboard.writeText(text).then(()=>{
-        notyf.success("Copied to clipboard")
-    })
-})
+// document.getElementById('roomCodeText').addEventListener('click', ()=>{
+//     let text = document.getElementById('roomCodeText').innerHTML
+//     navigator.clipboard.writeText(text).then(()=>{
+//         notyf.success("Copied to clipboard")
+//     })
+// })
 
 var videoPlayer = document.getElementById("video-player")
 let lastcurrentime = 0;
 
-const landingPage = document.getElementById("landing")
+//const landingPage = document.getElementById("landing")
 const profilePage = document.getElementById("profile")
-const createPage = document.getElementById("create")
+//const createPage = document.getElementById("create")
 const joinPage = document.getElementById("join")
 const roomPage = document.getElementById("room")
-const socket = io.connect("https://local-party.herokuapp.com")
+const socket = io.connect("http://116.205.178.152:5001")
 
 socket.on('connect', function (socket) {
     console.log('Connected to the server!');   
-    landingPage.style.display = "block" 
+    joinPage.style.display = "block" 
 });
 
 
@@ -64,7 +64,7 @@ socket.on('user-joined', data => {
             content: `${data.name} just popped into the party.`,
             pfp: data.pfp
         })
-        document.getElementById("pplinparty").setAttribute("title", `People in party: ${data.members}`)
+        document.getElementById("pplinparty").innerHTML = data.members//.setAttribute("title", `People in party: ${data.members}`)
         var toolTipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
         toolTipTriggerList.map(function (tooltipTriggerE1){
             return new bootstrap.Tooltip(tooltipTriggerE1)
@@ -75,7 +75,7 @@ socket.on('user-joined', data => {
 
 socket.on('updateMemberInfo', data => {
     if(data.roomCode == localStorage.getItem("roomCode")){
-        document.getElementById("pplinparty").setAttribute("title", `People in party: ${data.members}`)
+        document.getElementById("pplinparty").innerHTML =  data.members //.setAttribute("title", `People in party: ${data.members}`)
         var toolTipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
         toolTipTriggerList.map(function (tooltipTriggerE1){
             return new bootstrap.Tooltip(tooltipTriggerE1)
@@ -99,7 +99,7 @@ socket.on('left', data => {
         content: `${data.name} left the party.`,
         pfp: 'black',
     })
-    document.getElementById("pplinparty").setAttribute("title", `People in party: ${data.members}`)
+    document.getElementById("pplinparty").innerHTML =  data.members//.setAttribute("title", `People in party: ${data.members}`)
     var toolTipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
     var toolTipList = toolTipTriggerList.map(function (tooltipTriggerE1){
         return new bootstrap.Tooltip(tooltipTriggerE1)
@@ -141,7 +141,7 @@ socket.on('playerControlUpdate', data => {
         videoPlayer.currentTime = data.context
         allowEmit = false;
         videoPlayer.pause()
-        let content = time("played",data.username,data.context)
+        let content = time("paused",data.username,data.context)
         append({
             name: "Dogs' Party", 
             content: content,
@@ -168,10 +168,11 @@ if(localStorage.getItem("pfpUrl") == null) {
 }
 
 document.addEventListener("click", function (e) {
-    if(e.target.id == "createRoomButton") {
+    /*if(e.target.id == "createRoomButton") {
         landingPage.style.display = "none"
         createPage.style.display = "block"
     }
+    
     if(e.target.id == "roomCreateButton") {
         const roomName = document.getElementById("roomname").value
         if(roomName.length == 0) {
@@ -204,7 +205,7 @@ document.addEventListener("click", function (e) {
                     redirect: 'follow'
                 };
 
-                fetch("https://local-party.herokuapp.com/room/create", requestOptions)
+                fetch("http://116.205.178.152:5001/room/create", requestOptions)
                 .then( async (result) => {
                     const resp = await result.json()
                     if(resp.message == "success") {
@@ -227,13 +228,14 @@ document.addEventListener("click", function (e) {
     if(e.target.id == "joinRoomButton") {
         landingPage.style.display = "none"
         joinPage.style.display = "block"
-    }
+    }*/
     if(e.target.id == "roomJoinButton") {
-        const inputRoomCode = document.getElementById("roomCode").value
-        if(inputRoomCode.length == 0) {
-            document.getElementById("joinRoomText").innerHTML = "Please fill in all the fields"
-        } else {
-            if(localStorage.getItem("videoPath") == null || localStorage.getItem("videoSize") == null || document.getElementById("join-username").value.length == 0) {
+        const inputRoomCode = "ddogs" //document.getElementById("roomCode").value
+        // if(inputRoomCode.length == 0) {
+        //     document.getElementById("joinRoomText").innerHTML = "Please fill in all the fields"
+        // } else 
+        //{
+            if(localStorage.getItem("videoPath") == null ||  document.getElementById("join-username").value.length == 0) {
                 document.getElementById("joinRoomText").innerHTML = "Please fill in all the fields"
             } else {
                 var myHeaders = new Headers();
@@ -251,15 +253,15 @@ document.addEventListener("click", function (e) {
                     redirect: 'follow'
                 };
 
-                fetch("https://local-party.herokuapp.com/room/join", requestOptions)
+                fetch("http://116.205.178.152:5001/room/join", requestOptions)
                 .then( async (result) => {
                     const resp = await result.json()
                     if(resp.message != "success") {
                         document.getElementById("joinRoomText").innerHTML = resp.message
                     } else {
-                        document.getElementById("joinRoomText").innerHTML = ""
+                        document.getElementById("joinRoomText").innerHTML = "" //resp.roomCode + resp.roomName
                         document.getElementById("roomNameText").innerHTML = resp.roomName 
-                        document.getElementById("roomCodeText").innerHTML = resp.roomCode
+                        //document.getElementById("roomCodeText").innerHTML = resp.roomCode
                         var toolTipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
                         var toolTipList = toolTipTriggerList.map(function (tooltipTriggerE1){
                             return new bootstrap.Tooltip(tooltipTriggerE1)
@@ -276,18 +278,19 @@ document.addEventListener("click", function (e) {
                 })
                 .catch(error => console.log('error', error));
             }
-        }
+        //}
     }
 
     if(e.target.id == "roomLeaveButton") {
-        videoPlayer.setAttribute("src", "C:\Users\anshu\Desktop\Anshul\Projects\local-party\src\test.mp4")
+        //videoPlayer.setAttribute("src", "C:\Users\anshu\Desktop\Anshul\Projects\local-party\src\test.mp4")
         socket.emit('disconnectUser', { roomCode: localStorage.getItem("roomCode"), name: localStorage.getItem("username") , pfp: localStorage.getItem("pfpUrl") })
         location.reload()
     }
+
     if(e.target.id == "backButton") {
-        joinPage.style.display = "none"
-        createPage.style.display = "none"
-        landingPage.style.display = "block"
+        joinPage.style.display = "block"
+        //createPage.style.display = "none"
+        //landingPage.style.display = "block"
     }
 })
 

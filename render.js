@@ -83,7 +83,6 @@ socket.on('updateMemberInfo', data => {
     }
 })
 
-
 socket.on('receive', data => {
     append({
         name: data.name,
@@ -95,7 +94,7 @@ socket.on('receive', data => {
 
 socket.on('left', data => {
     append({
-        name: "Dogs' Party",
+        name: "Log",
         content: `${data.name} left the party.`,
         pfp: 'black',
     })
@@ -109,7 +108,7 @@ socket.on('left', data => {
 
 socket.on('leftdefault', data => {
     append({
-        name: "Dogs' Party",
+        name: "Log",
         content: `${data.name} left the party.`,
         pfp: 'black',
     })
@@ -130,7 +129,7 @@ socket.on('playerControlUpdate', data => {
         videoPlayer.play()
         let content = time("played", data.username, data.context)
         append({
-            name: "Dogs' Party", 
+            name: "Log", 
             content: content,
             pfp: "black"
         })
@@ -143,7 +142,7 @@ socket.on('playerControlUpdate', data => {
         videoPlayer.pause()
         let content = time("paused",data.username,data.context)
         append({
-            name: "Dogs' Party", 
+            name: "Log", 
             content: content,
             pfp: "black"
         })
@@ -287,11 +286,11 @@ document.addEventListener("click", function (e) {
         location.reload()
     }
 
-    if(e.target.id == "backButton") {
-        joinPage.style.display = "block"
-        //createPage.style.display = "none"
-        //landingPage.style.display = "block"
-    }
+    // if(e.target.id == "backButton") {
+    //     joinPage.style.display = "block"
+    //     //createPage.style.display = "none"
+    //     //landingPage.style.display = "block"
+    // }
 })
 
 const form = document.getElementById("send-form")
@@ -323,7 +322,7 @@ function videoControlsHandler(e) {
             socket.emit("playerControl", {message: "play", context: videoPlayer.currentTime, roomCode: localStorage.getItem("roomCode")}) 
             let content = time("played","You", videoPlayer.currentTime)
             append({
-                name: "Dogs' Party", 
+                name: "Log", 
                 content: content,
                 pfp: "black"
             })
@@ -337,7 +336,7 @@ function videoControlsHandler(e) {
             socket.emit("playerControl", {message: "pause", context: videoPlayer.currentTime, roomCode: localStorage.getItem("roomCode")})
             let content = time("paused","You", videoPlayer.currentTime)
             append({
-                name: "Dogs' Party", 
+                name: "Log", 
                 content: content,
                 pfp: "black"
             })
